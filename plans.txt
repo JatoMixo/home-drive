@@ -1,0 +1,17 @@
+==== OBJECTIVES ====
+- Create a simple server to which you can upload files and download them later.
+- Visualize simple files like .png or .txt
+
+---- EXTRA ----
+- Make a way of compressing the files stored in the "Drive Storagement" directory.
+- Create a small file encryption algorithm for the local files or implement one like RSA or something like that.
+
+==== PATHS ====
+- / -> Show file explorer at the root of the "Drive Storagement" directory.
+- /PATH/TO/DIRECTORY -> Show file explorer on the desired directory.
+- /view/PATH/TO/FILE -> Show the contents of the file from the specified path.
+- /download/PATH/TO/FILE/ -> Download on the client the directory or the file specified (Maybe implement the same for directories).
+- Upload ones go here
+
+==== TODO ====
+- Find a way of uploading the files (Have no idea how to do it)
