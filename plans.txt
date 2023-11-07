@@ -10,7 +10,7 @@
 - / -> Show file explorer at the root of the "Drive Storagement" directory.
 - /PATH/TO/DIRECTORY -> Show file explorer on the desired directory.
 - /view/PATH/TO/FILE -> Show the contents of the file from the specified path.
-- /download/PATH/TO/FILE/ -> Download on the client the directory or the file specified (Maybe implement the same for directories).
+[DONE] - /download/PATH/TO/FILE/ -> Download on the client the file specified (Maybe implement the same for directories).
 - Upload ones go here
 
 ==== TODO ====
