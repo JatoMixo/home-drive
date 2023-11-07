@@ -7,10 +7,12 @@
 - Create a small file encryption algorithm for the local files or implement one like RSA or something like that.
 
 ==== PATHS ====
-- / -> Show file explorer at the root of the "Drive Storagement" directory.
+- / -> Show root of the "Drive Storagement" directory.
+- /explorer/PATH/TO/DIR -> Show file explorer on the directory specified.
 - /PATH/TO/DIRECTORY -> Show file explorer on the desired directory.
-- /view/PATH/TO/FILE -> Show the contents of the file from the specified path.
-[DONE] - /download/PATH/TO/FILE/ -> Download on the client the file specified (Maybe implement the same for directories).
+- /content/PATH/TO/FILE -> Show the contents of the file from the specified path.
+[DONE] - /download/PATH/TO/FILE/ -> Download on the client the file specified.
+- /download/PATH/TO/DIR -> Download the directory specified.
 - Upload ones go here
 
 ==== TODO ====

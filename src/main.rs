@@ -6,6 +6,7 @@ async fn main() -> tide::Result<()> {
     femme::start();
 
     let mut app = tide::new();
+    app.at("/").get(|_| async{ Ok("Welcome to the Home Drive") });
 
     handle_download_route(&mut app).await?;
 
