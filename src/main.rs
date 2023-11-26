@@ -4,6 +4,8 @@ use download::handle_download_route;
 mod explorer;
 use explorer::handle_explorer;
 
+mod directory_reader;
+
 #[tokio::main]
 async fn main() -> tide::Result<()> {
     femme::start();
