@@ -1,4 +1,4 @@
-use crate::directory_reader::list_directory;
+use crate::file_manager::list_directory;
 
 pub async fn handle_explorer(req: tide::Request<()>) -> tide::Result<tide::Body> {
     let file_path = req.url().path();
