@@ -4,7 +4,8 @@
 
 ==== PATHS ====
 [DONE] - /PATH/TO/DIRECTORY -> Show file explorer on the desired directory.
-- /content/PATH/TO/FILE -> Show the contents of the file from the specified path.
+[DONE] - /content/PATH/TO/FILE -> Show the contents of the file from the specified path.
+- /content/PATH/TO/IMAGE -> Return the image data to display in the client.
 [DONE] - /download/PATH/TO/FILE/ -> Download on the client the file specified.
 - /download/PATH/TO/DIR -> Download the directory specified.
 - /upload/PATH/TO/DIR (POST) -> Upload a file (Maybe also directories) in the corresponding directory
