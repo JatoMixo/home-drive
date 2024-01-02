@@ -15,6 +15,7 @@
         background-color: $dark-background-color;
 
         padding: 10px;
+        width: 100%;
     }
 
     #path-text {
