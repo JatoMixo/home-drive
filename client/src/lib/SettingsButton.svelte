@@ -36,5 +36,5 @@
 </style>
 
 <button on:click={switchSettings} id="settings-button">
-    <img src="/SettingsSymbol.png" id="icon" />
+    <img src="/SettingsSymbol.png" id="icon" alt="VSCode Shut Up" />
 </button>
