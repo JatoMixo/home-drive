@@ -1,18 +1,18 @@
 <script lang="ts">
-  import { invoke } from "@tauri-apps/api/tauri";
+  // Components
+  import Path from "./lib/Path.svelte";
 
-  let directories = "";
-  
-  async function getDirectories() {
-    directories = await invoke("get_directories", {path: "/"});
+  let path = "/usertal/asdasd";
+  let elementsInPathDirectory = ["one", "two.txt", "nice"];
+
+  const isRootDirectory = () => {
+    return path === "/";
   }
 
-  getDirectories();
 </script>
 
 <style lang="scss">
   @import "styles.scss";
 </style>
 
-<h1>Hello!</h1>
-<h1>List of directories: {directories}</h1>
+<Path path={path}/>
