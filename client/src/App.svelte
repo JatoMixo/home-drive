@@ -13,6 +13,13 @@
 
 <style lang="scss">
   @import "styles.scss";
+
+  #path {
+    position: sticky;
+    top: 0;
+  }
 </style>
 
-<Path path={path}/>
+<div id="path">
+  <Path path={path}/>
+</div>
