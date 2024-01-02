@@ -29,6 +29,11 @@
 
     gap: 10px;
   }
+
+  #settings-menu-container {
+    position: absolute;
+    right: 8px;
+  }
 </style>
 
 <div id="top-row" class="row">
@@ -37,4 +42,6 @@
   <SettingsButton/>
 </div>
 
-<SettingsMenu />
+<div id="settings-menu-container">
+  <SettingsMenu />
+</div>
