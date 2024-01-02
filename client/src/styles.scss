@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Hack Nerd Font";
+  src: url("../public/HackNerdFont.ttf");
+}
+
 :root {
   background-color: #171717;
 
@@ -5,3 +10,6 @@
   text-shadow: 0 0 4px white;
   font-family: "Hack Nerd Font";
 }
+
+$red-color: #EF3054;
+$dark-background-color: #090909;

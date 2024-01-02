@@ -4,8 +4,8 @@
 
 <style lang="scss">
 
-    $red-color: #EF3054;
-    $dark-background-color: #090909;
+    // Import the color variables
+    @import "../styles.scss";
 
     #path-container {
         border: solid 4px $red-color;
