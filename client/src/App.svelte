@@ -5,12 +5,14 @@
   import SettingsMenu from "./lib/SettingsMenu.svelte";
 
   let path = "/usertal/asdasd";
+  let serverIp = "";
   let elementsInPathDirectory = ["one", "two.txt", "nice"];
 
   const isRootDirectory = () => {
     return path === "/";
   }
 
+  let displayingSettings = false;
 </script>
 
 <style lang="scss">
@@ -30,18 +32,31 @@
     gap: 10px;
   }
 
+  @keyframes appear {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 100%;
+    }
+  }
+
   #settings-menu-container {
     position: absolute;
     right: 8px;
+
+    animation: appear 150ms;
   }
 </style>
 
 <div id="top-row" class="row">
   <Path path={path}/>
 
-  <SettingsButton/>
+  <SettingsButton bind:displayingSettings={displayingSettings}/>
 </div>
 
-<div id="settings-menu-container">
-  <SettingsMenu />
-</div>
+{#if displayingSettings}
+  <div id="settings-menu-container">
+    <SettingsMenu bind:ip={serverIp}/>
+  </div>
+{/if}

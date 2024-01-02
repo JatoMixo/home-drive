@@ -3,7 +3,6 @@
 
     const switchSettings = () => {
         displayingSettings = !displayingSettings;
-        console.log("SU");
     }
 </script>
 
