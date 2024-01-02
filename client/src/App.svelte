@@ -2,6 +2,7 @@
   // Components
   import Path from "./lib/Path.svelte";
   import SettingsButton from "./lib/SettingsButton.svelte";
+  import SettingsMenu from "./lib/SettingsMenu.svelte";
 
   let path = "/usertal/asdasd";
   let elementsInPathDirectory = ["one", "two.txt", "nice"];
@@ -18,6 +19,8 @@
   #top-row {
     position: sticky;
     top: 0;
+
+    margin-bottom: 15px;
   }
 
   .row {
@@ -34,3 +37,4 @@
   <SettingsButton/>
 </div>
 
+<SettingsMenu />

@@ -11,12 +11,6 @@
     @import "../styles.scss";
 
     #settings-button {
-        background-color: $dark-background-color;
-
-        border: solid 4px $red-color;
-        border-radius: 15px;
-        box-shadow: 0 0 10px $red-color;
-
         padding: 5px;
 
         transition: background-color 100ms;
@@ -35,6 +29,6 @@
     }
 </style>
 
-<button on:click={switchSettings} id="settings-button">
-    <img src="/SettingsSymbol.png" id="icon" alt="VSCode Shut Up" />
+<button on:click={switchSettings} id="settings-button" class="box">
+    <img src="/SettingsSymbol.png" id="icon" alt="VSCode Shut Up"/>
 </button>

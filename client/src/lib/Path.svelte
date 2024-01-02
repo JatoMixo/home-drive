@@ -8,12 +8,6 @@
     @import "../styles.scss";
 
     #path-container {
-        border: solid 4px $red-color;
-        box-shadow: 0 0 10px $red-color;
-        border-radius: 15px;
-
-        background-color: $dark-background-color;
-
         padding: 10px;
         width: 100%;
     }
@@ -22,11 +16,9 @@
         margin: 0px;
 
         font-size: 20px;
-        color: $red-color;
-        text-shadow: 0 0 3px $red-color;
     }
 </style>
 
-<div id="path-container">
+<div id="path-container" class="box">
     <p id="path-text">{path}</p>
 </div>

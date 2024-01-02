@@ -13,3 +13,14 @@ $dark-background-color: #090909;
   text-shadow: 0 0 4px white;
   font-family: "Hack Nerd Font";
 }
+
+.box {
+  border: solid 4px $red-color;
+  box-shadow: 0 0 10px $red-color;
+  border-radius: 15px;
+
+  background-color: $dark-background-color;
+
+  color: $red-color;
+  text-shadow: 0 0 3px $red-color;
+}
