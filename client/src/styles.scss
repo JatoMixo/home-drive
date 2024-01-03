@@ -24,3 +24,17 @@ $dark-background-color: #090909;
   color: $red-color;
   text-shadow: 0 0 3px $red-color;
 }
+
+button {
+  background-color: $dark-background-color;
+
+  transition: background-color 100ms;
+}
+
+button:hover {
+  background-color: #151515;
+}
+
+button:active {
+  background-color: #4D1822;
+}

@@ -3,6 +3,7 @@
   import Path from "./lib/Path.svelte";
   import SettingsButton from "./lib/SettingsButton.svelte";
   import SettingsMenu from "./lib/SettingsMenu.svelte";
+  import UploadButton from "./lib/UploadButton.svelte";
 
   let path = "/usertal/asdasd";
   let serverIp = "";
@@ -60,3 +61,5 @@
     <SettingsMenu bind:ip={serverIp}/>
   </div>
 {/if}
+
+<UploadButton/>

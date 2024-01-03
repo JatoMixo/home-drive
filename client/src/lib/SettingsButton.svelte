@@ -11,16 +11,6 @@
 
     #settings-button {
         padding: 5px;
-
-        transition: background-color 100ms;
-    }
-
-    #settings-button:hover {
-        background-color: #151515;
-    }
-
-    #settings-button:active {
-        background-color: #4D1822;
     }
 
     #icon {
