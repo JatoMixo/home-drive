@@ -1,34 +1,38 @@
 <script lang="ts">
     export let actualPath = "";
+
+    const addFolder = () => {
+
+    };
+
 </script>
 
 <style lang="scss">
     @import "../styles.scss";
 
-    #upload-button {
+    #new-folder-button {
         display: flex;
         align-items: center;
-        gap: 5px;
+        gap: 10px;
 
-        padding: 5px;
+        padding: 10px;
     }
 
     #icon {
-        width: 40px;
+        width: 30px;
 
         margin: 0;
     }
 
-    #upload-text {
+    #new-folder-text {
         font-size: 20px;
         font-family: "Hack Nerd Font";
 
         margin: 0;
-        margin-right: 6px;
     }
 </style>
 
-<button id="upload-button" class="box">
-    <img src="/UploadSymbol.png" alt="" id="icon"/>
-    <p id="upload-text">Upload</p>
+<button id="new-folder-button" class="box" on:click={addFolder}>
+    <img src="/AddFolderSymbol.png" alt="" id="icon"/>
+    <p id="new-folder-text">New Folder</p>
 </button>

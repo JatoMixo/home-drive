@@ -4,6 +4,7 @@
   import SettingsButton from "./lib/SettingsButton.svelte";
   import SettingsMenu from "./lib/SettingsMenu.svelte";
   import UploadButton from "./lib/UploadButton.svelte";
+  import NewFolderButton from "./lib/NewFolderButton.svelte";
 
   let path = "/usertal/asdasd";
   let serverIp = "";
@@ -54,6 +55,10 @@
 
     right: 8px;
     bottom: 10px;
+
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 </style>
 
@@ -70,5 +75,6 @@
 {/if}
 
 <div id="bottom-row">
-  <UploadButton/>
+  <NewFolderButton actualPath={path}/>
+  <UploadButton actualPath={path}/>
 </div>
