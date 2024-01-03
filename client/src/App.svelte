@@ -48,6 +48,13 @@
 
     animation: appear 150ms;
   }
+
+  #bottom-row {
+    position: absolute;
+
+    right: 8px;
+    bottom: 10px;
+  }
 </style>
 
 <div id="top-row" class="row">
@@ -62,4 +69,6 @@
   </div>
 {/if}
 
-<UploadButton/>
+<div id="bottom-row">
+  <UploadButton/>
+</div>
