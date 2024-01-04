@@ -1,8 +1,7 @@
 pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
 use std::fs::read_dir;
 
-pub fn list_directory(file_path: &str) -> Vec<String> {
-
+pub fn list_elements_in_directory(file_path: &str) -> Vec<String> {
     read_dir(format!("{}/{}", STORAGEMENT_DIR_NAME, file_path)).unwrap().map(|file| {
         String::from(file.unwrap()
             .path()

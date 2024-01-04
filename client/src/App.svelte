@@ -8,16 +8,14 @@
   import Directory from "./lib/Directory.svelte";
   import File from "./lib/File.svelte";
 
-  let path = "/usertal/asdasd";
+  let path = "/";
   let serverIp = "";
-  let elementsInPathDirectory = [{name: "one", isDirectory: true}, {name: "two.txt", isDirectory: false}, {name: "three", isDirectory: true}];
+  let elementsInPathDirectory = [];
+
+  let isRootDirectory = path == "/";
 
   let directoriesInCurrentPath = elementsInPathDirectory.filter((element) => {return element.isDirectory});
   let filesInCurrentPath = elementsInPathDirectory.filter((element) => {return !element.isDirectory});
-
-  const isRootDirectory = () => {
-    return path === "/";
-  }
 
   let displayingSettings = false;
 </script>
@@ -118,10 +116,12 @@
 {/if}
 
 <!-- GO BACK BUTTON -->
-<button id="back-button">
-    <img src="/BackArrow.png" alt="[BACK]"/>
-    <p>..</p>
-</button>
+{#if !isRootDirectory}
+  <button id="back-button">
+      <img src="/BackArrow.png" alt="[BACK]"/>
+      <p>..</p>
+  </button>
+{/if}
 
 <!-- DIRECTORIES -->
 {#each directoriesInCurrentPath as directory}
