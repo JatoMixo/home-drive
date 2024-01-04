@@ -6,6 +6,7 @@
   import UploadButton from "./lib/UploadButton.svelte";
   import NewFolderButton from "./lib/NewFolderButton.svelte";
   import Directory from "./lib/Directory.svelte";
+  import File from "./lib/File.svelte";
 
   let path = "/usertal/asdasd";
   let serverIp = "";
@@ -13,8 +14,6 @@
 
   let directoriesInCurrentPath = elementsInPathDirectory.filter((element) => {return element.isDirectory});
   let filesInCurrentPath = elementsInPathDirectory.filter((element) => {return !element.isDirectory});
-
-  console.log(directoriesInCurrentPath);
 
   const isRootDirectory = () => {
     return path === "/";
@@ -66,6 +65,42 @@
     align-items: center;
     gap: 5px;
   }
+
+  #back-button {
+
+    display: flex;
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 0px;
+    width: 100%;
+
+    border-width: 0;
+    border-radius: 15px;
+
+    background-color: $normal-background-color;
+    transition: background-color 100ms;
+
+    img {
+      width: 65px;
+    }
+
+    p {
+      color: white;
+      text-shadow: 0 0 3px white;
+      font-family: "Hack Nerd Font";
+      font-size: 20px;
+    }
+  }
+
+  #back-button:hover {
+    background-color: $dark-background-color;
+  }
+
+  #back-button:active {
+    background-color: #252525;
+  }
 </style>
 
 <!-- TOP ROW -->
@@ -82,6 +117,12 @@
   </div>
 {/if}
 
+<!-- GO BACK BUTTON -->
+<button id="back-button">
+    <img src="/BackArrow.png" alt="[BACK]"/>
+    <p>..</p>
+</button>
+
 <!-- DIRECTORIES -->
 {#each directoriesInCurrentPath as directory}
   <Directory directory={directory}/>
@@ -89,7 +130,7 @@
 
 <!-- FILES -->
 {#each filesInCurrentPath as file}
-
+  <File file={file}/>
 {/each}
 
 <!-- BOTTOM ROW -->

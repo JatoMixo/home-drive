@@ -1,6 +1,5 @@
-
 <script lang="ts">
-    export let directory;
+    export let file;
 
     const download = () => {
 
@@ -10,7 +9,7 @@
 
     };
 
-    const enter = () => {
+    const visualize = () => {
 
     };
 </script>
@@ -79,9 +78,9 @@
     }
 </style>
 
-<button id="main-container" on:click={enter}>
-    <img src="/FolderSymbol.png" alt="[DIR]" id="icon"/>
-    <p id="name">{directory.name}</p>
+<button id="main-container" on:click={visualize}>
+    <img src="/FileSymbol.png" alt="[FILE]" id="icon"/>
+    <p id="name">{file.name}</p>
 
     <button id="download" class="action-button" on:click={download}>
         <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>
