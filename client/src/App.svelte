@@ -5,10 +5,16 @@
   import SettingsMenu from "./lib/SettingsMenu.svelte";
   import UploadButton from "./lib/UploadButton.svelte";
   import NewFolderButton from "./lib/NewFolderButton.svelte";
+  import Directory from "./lib/Directory.svelte";
 
   let path = "/usertal/asdasd";
   let serverIp = "";
-  let elementsInPathDirectory = ["one", "two.txt", "nice"];
+  let elementsInPathDirectory = [{name: "one", isDirectory: true}, {name: "two.txt", isDirectory: false}, {name: "three", isDirectory: true}];
+
+  let directoriesInCurrentPath = elementsInPathDirectory.filter((element) => {return element.isDirectory});
+  let filesInCurrentPath = elementsInPathDirectory.filter((element) => {return !element.isDirectory});
+
+  console.log(directoriesInCurrentPath);
 
   const isRootDirectory = () => {
     return path === "/";
@@ -62,18 +68,31 @@
   }
 </style>
 
+<!-- TOP ROW -->
 <div id="top-row" class="row">
   <Path path={path}/>
 
   <SettingsButton bind:displayingSettings={displayingSettings}/>
 </div>
 
+<!-- SETTINGS MENU -->
 {#if displayingSettings}
   <div id="settings-menu-container">
     <SettingsMenu bind:ip={serverIp}/>
   </div>
 {/if}
 
+<!-- DIRECTORIES -->
+{#each directoriesInCurrentPath as directory}
+  <Directory directory={directory}/>
+{/each}
+
+<!-- FILES -->
+{#each filesInCurrentPath as file}
+
+{/each}
+
+<!-- BOTTOM ROW -->
 <div id="bottom-row">
   <NewFolderButton actualPath={path}/>
   <UploadButton actualPath={path}/>

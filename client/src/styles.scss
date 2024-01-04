@@ -5,9 +5,10 @@
 
 $red-color: #EF3054;
 $dark-background-color: #090909;
+$normal-background-color: #171717;
 
 :root {
-  background-color: #171717;
+  background-color: $normal-background-color;
 
   color: white;
   text-shadow: 0 0 4px white;

@@ -31,7 +31,7 @@
     }
 
     .text-input {
-        background-color: #171717;
+        background-color: $normal-background-color;
         border: none;
         border-radius: 5px;
 
