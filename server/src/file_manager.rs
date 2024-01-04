@@ -24,7 +24,7 @@ fn string_vector_to_file_elements(string_vector: Vec<String>) -> Vec<FileElement
     string_vector
         .iter()
         .map(|string| {
-            let is_directory = !string.contains(".");
+            let is_directory = std::fs::read_to_string("drive-storagement/another_dir/another_test.txt").is_err();
 
             FileElement::new(string.to_string(), is_directory)
         })
