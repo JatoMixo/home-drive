@@ -14,7 +14,7 @@ async fn main() -> tide::Result<()> {
 
     handle_download_route(&mut app).await?;
     // app.at("/*").get(handle_explorer);
-    println!("{:?}", file_manager::Directory::new("").get_name());
+    println!("{:?}", file_manager::Directory::new("").get_subdirectories());
 
     app.listen("0.0.0.0:8080").await?;
 
