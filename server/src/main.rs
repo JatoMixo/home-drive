@@ -2,7 +2,7 @@ mod download;
 use download::handle_download_route;
 
 mod explorer;
-use explorer::handle_explorer;
+// use explorer::handle_explorer;
 
 mod file_manager;
 
@@ -13,7 +13,8 @@ async fn main() -> tide::Result<()> {
     let mut app = tide::new();
 
     handle_download_route(&mut app).await?;
-    app.at("/*").get(handle_explorer);
+    // app.at("/*").get(handle_explorer);
+    println!("{:?}", file_manager::Directory::new("").get_name());
 
     app.listen("0.0.0.0:8080").await?;
 

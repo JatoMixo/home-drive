@@ -1,41 +1,41 @@
 pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
-use std::fs::read_dir;
+use std::fs;
 
-#[derive(serde::Serialize)]
-pub struct FileElement {
-    pub name: String,
-    pub is_directory: bool,
+pub struct Directory {
+    path: String,
 }
 
-impl FileElement {
-    pub fn new(name: String, is_directory: bool) -> FileElement {
-        FileElement {
-            name: name,
-            is_directory: is_directory,
+impl Directory {
+    pub fn new(path: &str) -> Directory {
+        let storagement_path = format!("{}/{}", STORAGEMENT_DIR_NAME, path);
+        if fs::read_dir(&path).is_err() {
+            fs::create_dir_all(storagement_path).expect("Error creating Directory");
+        }
+
+        Directory {
+            path: path.to_string(),
         }
     }
+
+    pub fn get_name(&self) -> Option<String> {
+        let path_split = split_path(&self.path);
+        let last_element_of_path = path_split.last()?;
+
+        Some(last_element_of_path.clone())
+    }
+
+    /*pub fn get_subdirectories(&self) -> Vec<Directory> {
+        let directory_elements = read_dir(self.path);
+    }*/
 }
 
-pub fn file_elements_in_path(path: String) -> Vec<FileElement> {
-    string_vector_to_file_elements(list_elements_in_directory(path))
-}
-
-fn string_vector_to_file_elements(string_vector: Vec<String>) -> Vec<FileElement> {
-    string_vector
+fn split_path(path: &str) -> Vec<String> {
+    path
+        .split("/")
+        .collect::<Vec<&str>>()
         .iter()
-        .map(|string| {
-            let is_directory = !string.contains(".");
-
-            FileElement::new(string.to_string(), is_directory)
+        .map(|&raw_string| {
+            raw_string.to_string()
         })
-        .collect::<Vec<FileElement>>()
-}
-
-fn list_elements_in_directory(file_path: String) -> Vec<String> {
-    read_dir(format!("{}/{}", STORAGEMENT_DIR_NAME, file_path)).unwrap().map(|file| {
-        String::from(file.unwrap()
-            .path()
-            .file_name().unwrap()
-            .to_str().unwrap())
-    }).collect::<Vec<String>>()
+        .collect::<Vec<String>>()
 }
