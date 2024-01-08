@@ -8,3 +8,4 @@ tide = { version = "0.16.0" }
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.33.0", features = ["full"] }
 femme = "2.2.1"
+serde_json = "1.0.111"

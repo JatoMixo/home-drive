@@ -1,7 +1,8 @@
 pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
 use std::fs;
+use serde_json::json;
 
-#[derive(Debug)]
+#[derive(Debug, serde::Serialize)]
 pub struct File {
     path: String,
 }
@@ -26,7 +27,7 @@ impl File {
     }
 }
 
-#[derive(Debug)]
+#[derive(Debug, serde::Serialize)]
 pub struct Directory {
     path: String,
 }
@@ -83,6 +84,23 @@ impl Directory {
             )
         })
         .collect::<Vec<File>>()
+    }
+
+    pub fn build_files_and_directories_json(&self) -> serde_json::Value {
+        let directories = self.get_subdirectories();
+        let files = self.get_files();
+
+        let directories_names = directories.iter().map(|directory| {
+            directory.get_name()
+        }).collect::<Vec<String>>();
+        let files_names = files.iter().map(|file| {
+            file.get_full_name()
+        }).collect::<Vec<String>>();
+
+        json!({
+            "directories": directories_names,
+            "files": files_names,
+        })
     }
 }
 
