@@ -1,7 +1,29 @@
 pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
 use std::fs;
 
-#[derive(Debug)]
+#[derive(Debug, serde::Serialize)]
+pub struct File {
+    path: String,
+}
+
+impl File {
+    pub fn new(path: &str) -> File {
+        File {
+            path: path.to_string(),
+        }
+    }
+
+    fn get_full_name(&self) -> String {
+        self
+            .path
+            .split("/")
+            .last()
+            .unwrap()
+            .to_string()
+    }
+}
+
+#[derive(Debug, serde::Serialize)]
 pub struct Directory {
     path: String,
 }
@@ -38,10 +60,25 @@ impl Directory {
         .iter()
         .map(|sub_directory| {
             Directory {
-                path: get_element_name(sub_directory.as_ref().unwrap()),
+                path: get_element_path(sub_directory.as_ref().unwrap()),
             }
         })
         .collect::<Vec<Directory>>()
+    }
+
+    pub fn get_files(&self) -> Vec<File> {
+        let directory_elements = fs::read_dir(&self.get_absolute_path()).expect("Path didn't exist");
+
+        directory_elements
+        .filter(|element| !is_element_directory(element.as_ref().unwrap()))
+        .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
+        .iter()
+        .map(|sub_directory| {
+            File {
+                path: get_element_path(sub_directory.as_ref().unwrap()),
+            }
+        })
+        .collect::<Vec<File>>()
     }
 }
 
@@ -60,7 +97,7 @@ fn is_element_directory(element: &fs::DirEntry) -> bool {
     element.metadata().unwrap().is_dir()
 }
 
-fn get_element_name(element: &fs::DirEntry) -> String {
+fn get_element_path(element: &fs::DirEntry) -> String {
     let full_path = element.path().to_str().unwrap().to_string();
     let drive_storagement_prefix = &format!("{}/", STORAGEMENT_DIR_NAME);
 
