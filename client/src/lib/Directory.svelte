@@ -46,7 +46,7 @@
     }
 
     #icon {
-        width: 65px;
+        width: 50px;
     }
 
     #name {
@@ -57,11 +57,11 @@
     }
 
     .action-button-icon {
-        width: 50px;
+        width: 40px;
     }
 
     #trash-icon {
-        width: 30px;
+        width: 25px;
     }
 
     .action-button {

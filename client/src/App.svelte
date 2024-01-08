@@ -88,7 +88,7 @@
     transition: background-color 100ms;
 
     img {
-      width: 65px;
+      width: 50px;
     }
 
     p {
