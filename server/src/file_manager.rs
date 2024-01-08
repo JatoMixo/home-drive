@@ -25,6 +25,14 @@ impl File {
             .unwrap()
             .to_string()
     }
+
+    pub fn get_absolute_path(&self) -> String {
+        format!("{}/{}", STORAGEMENT_DIR_NAME, self.path)
+    }
+
+    pub fn get_deleted(self) -> Result<(), std::io::Error> {
+        fs::remove_file(self.get_absolute_path())
+    }
 }
 
 #[derive(Debug, serde::Serialize)]
@@ -101,6 +109,10 @@ impl Directory {
             "directories": directories_names,
             "files": files_names,
         })
+    }
+
+    pub fn get_deleted(self) -> Result<(), std::io::Error> {
+        fs::remove_dir_all(self.get_absolute_path())
     }
 }
 
