@@ -1,15 +1,18 @@
 pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
 use std::fs;
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug)]
 pub struct File {
     path: String,
 }
 
 impl File {
     pub fn new(path: &str) -> File {
+        // Windows paths are different than Linux ones
+        let path = path.replace("\\", "/");
+
         File {
-            path: path.to_string(),
+            path: path,
         }
     }
 
@@ -23,13 +26,14 @@ impl File {
     }
 }
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug)]
 pub struct Directory {
     path: String,
 }
 
 impl Directory {
     pub fn new(path: &str) -> Directory {
+        let path = path.replace("\\", "/");
         let storagement_path = format!("{}/{}", STORAGEMENT_DIR_NAME, path);
         if fs::read_dir(&path).is_err() {
             fs::create_dir_all(storagement_path).expect("Error creating Directory");
@@ -59,9 +63,9 @@ impl Directory {
         .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
         .iter()
         .map(|sub_directory| {
-            Directory {
-                path: get_element_path(sub_directory.as_ref().unwrap()),
-            }
+            Directory::new(
+                &get_element_path(sub_directory.as_ref().unwrap())
+            )
         })
         .collect::<Vec<Directory>>()
     }
@@ -74,9 +78,9 @@ impl Directory {
         .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
         .iter()
         .map(|sub_directory| {
-            File {
-                path: get_element_path(sub_directory.as_ref().unwrap()),
-            }
+            File::new(
+                &get_element_path(sub_directory.as_ref().unwrap())
+            )
         })
         .collect::<Vec<File>>()
     }
