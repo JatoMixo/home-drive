@@ -35,7 +35,7 @@ impl File {
     }
 }
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct Directory {
     path: String,
 }
@@ -113,6 +113,16 @@ impl Directory {
 
     pub fn get_deleted(self) -> Result<(), std::io::Error> {
         fs::remove_dir_all(self.get_absolute_path())
+    }
+
+    pub fn get_path(&self) -> String {
+        self.path.to_string()
+    }
+}
+
+impl Default for Directory {
+    fn default() -> Directory {
+        Directory::new("")
     }
 }
 
