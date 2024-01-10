@@ -1,5 +1,6 @@
 pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
 use std::fs;
+use std::io::Write;
 use serde_json::json;
 
 #[derive(Debug, serde::Serialize)]
@@ -8,6 +9,16 @@ pub struct File {
 }
 
 impl File {
+    pub fn create(path: &str, content: Vec<u8>) -> File {
+
+        let path = &format!("{}/{}", STORAGEMENT_DIR_NAME, path.replace("\\", "/"));
+
+        let mut file = fs::File::create(path).unwrap();
+        file.write_all(content.as_slice()).unwrap();
+
+        File::new(path)
+    }
+
     pub fn new(path: &str) -> File {
         // Windows paths are different than Linux ones
         let path = path.replace("\\", "/");
