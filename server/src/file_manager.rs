@@ -33,6 +33,10 @@ impl File {
     pub fn get_deleted(self) -> Result<(), std::io::Error> {
         fs::remove_file(self.get_absolute_path())
     }
+
+    pub fn get_content(&self) -> Vec<u8> {
+        std::fs::read(self.get_absolute_path()).unwrap()
+    }
 }
 
 #[derive(Debug, serde::Serialize, serde::Deserialize)]
