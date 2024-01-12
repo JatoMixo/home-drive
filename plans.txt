@@ -6,4 +6,4 @@
 [DONE] - /explorer//PATH/TO/DIRECTORY -> Show file explorer on the desired directory.
 [DONE] - /download/PATH/TO/FILE/ -> Download on the client the file specified.
 - /download/PATH/TO/DIR -> Download the directory specified.
-- /upload/PATH/TO/DIR (POST) -> Upload a file (Maybe also directories) in the corresponding directory
+[DONE] - /upload/PATH/TO/DIR (POST) -> Upload a file (Maybe also directories) in the corresponding directory

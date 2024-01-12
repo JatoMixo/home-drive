@@ -25,7 +25,6 @@
 
         gap: 5px;
 
-        transition: background-color 100ms;
         padding: 5px;
 
         border-radius: 15px;
@@ -34,14 +33,6 @@
         margin-right: 0px;
 
         width: 100%;
-    }
-
-    #main-container:hover {
-        background-color: $dark-background-color;
-    }
-
-    #main-container:active {
-        background-color: #252525;
     }
 
     #icon {
@@ -71,6 +62,16 @@
 
         border-width: 0px;
         border-radius: 15px;
+
+        transition: background-color 100ms;
+    }
+
+    .action-button:hover {
+        background-color: #111111;
+    }
+
+    .action-button:active {
+        background-color: #000000;
     }
 
     #download {
