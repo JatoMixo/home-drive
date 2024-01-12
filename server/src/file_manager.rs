@@ -2,7 +2,6 @@ pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
 use std::fs;
 use std::io::Write;
 use serde_json::json;
-use tide::http::convert;
 
 #[derive(Debug, serde::Serialize)]
 pub struct File {
@@ -11,7 +10,6 @@ pub struct File {
 
 impl File {
     pub fn create(path: &str, content: Vec<u8>) -> File {
-
         let absolute_path = &convert_local_path_to_absolute(path);
 
         let mut file = fs::File::create(absolute_path).unwrap();
