@@ -2,6 +2,7 @@ pub const STORAGEMENT_DIR_NAME: &str = "drive-storagement";
 use std::fs;
 use std::io::Write;
 use serde_json::json;
+use tide::http::convert;
 
 #[derive(Debug, serde::Serialize)]
 pub struct File {
@@ -11,9 +12,9 @@ pub struct File {
 impl File {
     pub fn create(path: &str, content: Vec<u8>) -> File {
 
-        let path = &format!("{}/{}", STORAGEMENT_DIR_NAME, path.replace("\\", "/"));
+        let absolute_path = &convert_local_path_to_absolute(path);
 
-        let mut file = fs::File::create(path).unwrap();
+        let mut file = fs::File::create(absolute_path).unwrap();
         file.write_all(content.as_slice()).unwrap();
 
         File::new(path)
@@ -38,7 +39,7 @@ impl File {
     }
 
     pub fn get_absolute_path(&self) -> String {
-        format!("{}/{}", STORAGEMENT_DIR_NAME, self.path)
+        convert_local_path_to_absolute(&self.path)
     }
 
     pub fn get_deleted(self) -> Result<(), std::io::Error> {
@@ -58,7 +59,7 @@ pub struct Directory {
 impl Directory {
     pub fn new(path: &str) -> Directory {
         let path = path.replace("\\", "/");
-        let storagement_path = format!("{}/{}", STORAGEMENT_DIR_NAME, path);
+        let storagement_path = convert_local_path_to_absolute(&path);
         if fs::read_dir(&path).is_err() {
             fs::create_dir_all(storagement_path).expect("Error creating Directory");
         }
@@ -69,7 +70,7 @@ impl Directory {
     }
 
     pub fn get_absolute_path(&self) -> String {
-        format!("{}/{}", STORAGEMENT_DIR_NAME, self.path)
+        convert_local_path_to_absolute(&self.path)
     }
 
     pub fn get_name(&self) -> String {
@@ -83,30 +84,30 @@ impl Directory {
         let directory_elements = fs::read_dir(&self.get_absolute_path()).expect("Path didn't exist");
 
         directory_elements
-        .filter(|element| is_element_directory(element.as_ref().unwrap()))
-        .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
-        .iter()
-        .map(|sub_directory| {
-            Directory::new(
-                &get_element_path(sub_directory.as_ref().unwrap())
-            )
-        })
-        .collect::<Vec<Directory>>()
+            .filter(|element| is_element_directory(element.as_ref().unwrap()))
+            .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
+            .iter()
+            .map(|sub_directory| {
+                Directory::new(
+                    &get_element_path(sub_directory.as_ref().unwrap())
+                )
+            })
+            .collect::<Vec<Directory>>()
     }
 
     pub fn get_files(&self) -> Vec<File> {
         let directory_elements = fs::read_dir(&self.get_absolute_path()).expect("Path didn't exist");
 
         directory_elements
-        .filter(|element| !is_element_directory(element.as_ref().unwrap()))
-        .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
-        .iter()
-        .map(|sub_directory| {
-            File::new(
-                &get_element_path(sub_directory.as_ref().unwrap())
-            )
-        })
-        .collect::<Vec<File>>()
+            .filter(|element| !is_element_directory(element.as_ref().unwrap()))
+            .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
+            .iter()
+            .map(|sub_directory| {
+                File::new(
+                    &get_element_path(sub_directory.as_ref().unwrap())
+                )
+            })
+            .collect::<Vec<File>>()
     }
 
     pub fn build_files_and_directories_json(&self) -> serde_json::Value {
@@ -161,4 +162,8 @@ fn get_element_path(element: &fs::DirEntry) -> String {
     let drive_storagement_prefix = &format!("{}/", STORAGEMENT_DIR_NAME);
 
     full_path.strip_prefix(drive_storagement_prefix).unwrap_or(&full_path).to_string()
+}
+
+fn convert_local_path_to_absolute(local_path: &str) -> String {
+    format!("{}/{}", STORAGEMENT_DIR_NAME, local_path)
 }

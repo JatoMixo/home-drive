@@ -18,7 +18,6 @@ async fn main() -> tide::Result<()> {
     app.at("/delete").get(handle_delete_route);
     app.at("/directory").get(handle_directory_creation_route);
     app.at("/upload").post(handle_upload_route);
-    file_manager::File::create("potato.txt", vec![100, 122, 96, 65]);
 
     app.listen("0.0.0.0:8080").await?;
 
