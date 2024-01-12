@@ -15,10 +15,10 @@ impl File {
         let mut file = fs::File::create(absolute_path).unwrap();
         file.write_all(content.as_slice()).unwrap();
 
-        File::new(path)
+        File::open(path)
     }
 
-    pub fn new(path: &str) -> File {
+    pub fn open(path: &str) -> File {
         // Windows paths are different than Linux ones
         let path = path.replace("\\", "/");
 
@@ -101,7 +101,7 @@ impl Directory {
             .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
             .iter()
             .map(|sub_directory| {
-                File::new(
+                File::open(
                     &get_element_path(sub_directory.as_ref().unwrap())
                 )
             })
