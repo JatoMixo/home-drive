@@ -3,7 +3,7 @@ use std::fs;
 use std::io::Write;
 use serde_json::json;
 
-#[derive(Debug, serde::Serialize)]
+#[derive(Debug, serde::Serialize, serde::Deserialize)]
 pub struct File {
     path: String,
 }
@@ -25,6 +25,10 @@ impl File {
         File {
             path: path,
         }
+    }
+
+    pub fn get_path(&self) -> String {
+        self.path.clone()
     }
 
     fn get_full_name(&self) -> String {

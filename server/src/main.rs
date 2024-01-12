@@ -13,7 +13,7 @@ async fn main() -> tide::Result<()> {
 
     let mut app = tide::new();
 
-    handle_download_route(&mut app).await?;
+    app.at("/download").get(handle_download_route);
     app.at("/explorer/*").get(handle_explorer);
     app.at("/delete").get(handle_delete_route);
     app.at("/directory").get(handle_directory_creation_route);

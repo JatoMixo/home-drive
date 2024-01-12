@@ -1,9 +1,15 @@
-use crate::file_manager::STORAGEMENT_DIR_NAME;
+use tide::{StatusCode, Response};
 
-pub async fn handle_download_route(app: &mut tide::Server<()>) -> tide::Result<()> {
-    const ROUTE: &str = "/download";
+use crate::file_manager::File;
 
-    app.at(ROUTE).serve_dir(STORAGEMENT_DIR_NAME)?;
+pub async fn handle_download_route(req: tide::Request<()>) -> tide::Result<Response> {
+    let path: String = req.query::<File>()?.get_path();
+    let file = File::open(&path);
 
-    Ok(())
+    let response = Response::builder(StatusCode::Ok)
+        .body(file.get_content())
+        .header("content-type", "application/octet-stream")
+        .build();
+
+    Ok(response)
 }
