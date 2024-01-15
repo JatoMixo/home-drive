@@ -1,13 +1,27 @@
-#[derive(serde::Deserialize)]
-struct FileElement {
-    pub name: String,
-    pub is_directory: bool,
+#[derive(serde::Deserialize, Debug)]
+pub struct DirectoryContent {
+    directories: Vec<String>,
+    files: Vec<String>,
 }
 
-#[tauri::command]
-pub async fn get_elements_in_path(ip: String, path: String) -> Vec<FileElement> {
-    const SERVER_PORT: u16 = 8080;
-    let elements = reqwest::get(&format!("http://{}:{}/{}", ip, SERVER_PORT, path)).await.unwrap().json::<Vec<FileElement>>().await.unwrap();
+#[derive(Debug)]
+pub enum RequestError {
+    PathNotFound,
+} 
 
-    elements
+#[tauri::command]
+pub async fn get_elements_in_path(ip: &str, path: &str) -> Result<DirectoryContent, RequestError> {
+    const SERVER_PORT: u16 = 8080;
+    
+    let request = reqwest::get(&format!("http://{}:{}/explorer/{}", ip, SERVER_PORT, path)).await;
+    match request {
+        Ok(request_content) => {
+            let directory_content: DirectoryContent = request_content.json::<DirectoryContent>().await.unwrap();
+
+            Ok(directory_content)
+        },
+        Err(_) => {
+            Err(RequestError::PathNotFound)
+        }
+    }
 }
