@@ -1,9 +1,7 @@
 <script lang="ts">
     export let file;
-
-    const download = () => {
-
-    };
+    export let path;
+    export let serverIp;
 
     const remove = () => {
 
@@ -70,6 +68,10 @@
 
     #download {
         margin-left: auto;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 </style>
 
@@ -77,9 +79,9 @@
     <img src="/FileSymbol.png" alt="[FILE]" id="icon"/>
     <p id="name">{file}</p>
 
-    <button id="download" class="action-button" on:click={download}>
+    <a id="download" class="action-button" href={"http://" + serverIp + ":8080" + "/download/" + path + "/" + file}>
         <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>
-    </button>
+    </a>
     <button id="delete" class="action-button" on:click={remove}>
         <img src="/TrashSymbol.png" alt="[DELETE]" class="action-button-icon" id="trash-icon"/>
     </button>
