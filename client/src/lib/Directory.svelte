@@ -74,7 +74,7 @@
         border-radius: 15px;
     }
 
-    #download {
+    #delete {
         margin-left: auto;
     }
 </style>
@@ -83,9 +83,6 @@
     <img src="/FolderSymbol.png" alt="[DIR]" id="icon"/>
     <p id="name">{directory}</p>
 
-    <button id="download" class="action-button" on:click={download}>
-        <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>
-    </button>
     <button id="delete" class="action-button" on:click={remove}>
         <img src="/TrashSymbol.png" alt="[DELETE]" class="action-button-icon" id="trash-icon"/>
     </button>
