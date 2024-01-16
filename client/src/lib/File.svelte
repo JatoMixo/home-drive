@@ -3,8 +3,11 @@
     export let path;
     export let serverIp;
 
-    const remove = () => {
+    let gotRemoved = false;
 
+    const remove = () => {
+        fetch("http://" + serverIp + ":8080" + "/delete?path=" + path + "/" + file);
+        gotRemoved = true;
     };
 </script>
 
@@ -75,14 +78,16 @@
     }
 </style>
 
-<div id="main-container">
-    <img src="/FileSymbol.png" alt="[FILE]" id="icon"/>
-    <p id="name">{file}</p>
+{#if !gotRemoved}
+    <div id="main-container">
+        <img src="/FileSymbol.png" alt="[FILE]" id="icon"/>
+        <p id="name">{file}</p>
 
-    <a id="download" class="action-button" href={"http://" + serverIp + ":8080" + "/download/" + path + "/" + file}>
-        <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>
-    </a>
-    <button id="delete" class="action-button" on:click={remove}>
-        <img src="/TrashSymbol.png" alt="[DELETE]" class="action-button-icon" id="trash-icon"/>
-    </button>
-</div>
+        <a id="download" class="action-button" href={"http://" + serverIp + ":8080" + "/download/" + path + "/" + file}>
+            <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>
+        </a>
+        <button id="delete" class="action-button" on:click={remove}>
+            <img src="/TrashSymbol.png" alt="[DELETE]" class="action-button-icon" id="trash-icon"/>
+        </button>
+    </div>
+{/if}

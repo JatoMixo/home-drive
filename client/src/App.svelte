@@ -144,7 +144,7 @@
 
 <!-- FILES -->
 {#each filesInCurrentPath as file}
-  <File file={file} path={path} serverIp={serverIp}/>
+  <File file={file} path={path} serverIp={serverIp} />
 {/each}
 
 <!-- BOTTOM ROW -->
