@@ -1,13 +1,13 @@
-
 <script lang="ts">
     export let directory;
+    export let serverIp;
+    export let path;
 
-    const download = () => {
-
-    };
+    let gotRemoved = false; 
 
     const remove = () => {
-
+        fetch("http://" + serverIp + ":8080" + "/delete?path=" + path + "/" + directory + "/");
+        gotRemoved = true;
     };
 
     const enter = () => {
@@ -79,11 +79,13 @@
     }
 </style>
 
-<button id="main-container" on:click={enter}>
-    <img src="/FolderSymbol.png" alt="[DIR]" id="icon"/>
-    <p id="name">{directory}</p>
+{#if !gotRemoved}
+    <button id="main-container" on:click={enter}>
+        <img src="/FolderSymbol.png" alt="[DIR]" id="icon"/>
+        <p id="name">{directory}</p>
 
-    <button id="delete" class="action-button" on:click={remove}>
-        <img src="/TrashSymbol.png" alt="[DELETE]" class="action-button-icon" id="trash-icon"/>
+        <button id="delete" class="action-button" on:click={remove}>
+            <img src="/TrashSymbol.png" alt="[DELETE]" class="action-button-icon" id="trash-icon"/>
+        </button>
     </button>
-</button>
+{/if}

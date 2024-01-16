@@ -139,7 +139,7 @@
 
 <!-- DIRECTORIES -->
 {#each directoriesInCurrentPath as directory}
-  <Directory directory={directory}/>
+  <Directory directory={directory} serverIp={serverIp} path={path} />
 {/each}
 
 <!-- FILES -->

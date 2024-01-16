@@ -10,6 +10,5 @@ pub async fn handle_delete_route(req: tide::Request<()>) -> tide::Result<String>
     }
 
     let _ = Directory::new(&path).get_deleted();
-
     Ok(String::new())
 }
