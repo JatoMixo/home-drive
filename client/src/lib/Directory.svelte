@@ -81,7 +81,7 @@
 
 <button id="main-container" on:click={enter}>
     <img src="/FolderSymbol.png" alt="[DIR]" id="icon"/>
-    <p id="name">{directory.name}</p>
+    <p id="name">{directory}</p>
 
     <button id="download" class="action-button" on:click={download}>
         <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>

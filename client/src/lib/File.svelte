@@ -8,10 +8,6 @@
     const remove = () => {
 
     };
-
-    const visualize = () => {
-
-    };
 </script>
 
 <style lang="scss">
@@ -31,8 +27,6 @@
         border-width: 0px;
 
         margin-right: 0px;
-
-        width: 100%;
     }
 
     #icon {
@@ -79,9 +73,9 @@
     }
 </style>
 
-<button id="main-container" on:click={visualize}>
+<div id="main-container">
     <img src="/FileSymbol.png" alt="[FILE]" id="icon"/>
-    <p id="name">{file.name}</p>
+    <p id="name">{file}</p>
 
     <button id="download" class="action-button" on:click={download}>
         <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>
@@ -89,4 +83,4 @@
     <button id="delete" class="action-button" on:click={remove}>
         <img src="/TrashSymbol.png" alt="[DELETE]" class="action-button-icon" id="trash-icon"/>
     </button>
-</button>
+</div>

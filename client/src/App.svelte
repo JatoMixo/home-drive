@@ -8,14 +8,28 @@
   import Directory from "./lib/Directory.svelte";
   import File from "./lib/File.svelte";
 
+  // Tauri
+  import { invoke } from "@tauri-apps/api";
+
   let path = "/";
   let isRootDirectory = path == "/";
 
   let serverIp = "";
-  let elementsInPathDirectory: any = [];
 
-  let directoriesInCurrentPath = elementsInPathDirectory.filter((element) => {return element.isDirectory});
-  let filesInCurrentPath = elementsInPathDirectory.filter((element) => {return !element.isDirectory});
+  let directoriesInCurrentPath = [];
+  let filesInCurrentPath = [];
+
+  const getElementsInPath = (displayingSettings) => {
+    if (displayingSettings == true) {
+      return;
+    }
+
+    invoke("get_elements_in_path", {"ip": serverIp, "path": path}).then((elements) => {
+      directoriesInCurrentPath = elements["directories"];
+      filesInCurrentPath = elements["files"];
+    });
+  }
+  $: getElementsInPath(displayingSettings);
 
   let displayingSettings = false;
 </script>

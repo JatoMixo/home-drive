@@ -4,11 +4,9 @@
 mod file_lister;
 use file_lister::get_elements_in_path;
 
-#[tokio::main]
-async fn main() {
-    println!("{:?}", get_elements_in_path("localhost", "/").await);
+fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![/*get_elements_in_path*/])
+        .invoke_handler(tauri::generate_handler![get_elements_in_path])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
