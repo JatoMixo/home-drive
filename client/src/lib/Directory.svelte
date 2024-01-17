@@ -11,7 +11,7 @@
     };
 
     const enter = () => {
-
+        path += directory + "/";
     };
 </script>
 

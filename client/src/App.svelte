@@ -12,14 +12,14 @@
   import { invoke } from "@tauri-apps/api";
 
   let path = "/";
-  let isRootDirectory = path == "/";
+  $: isRootDirectory = path == "/";
 
   let serverIp = "";
 
   let directoriesInCurrentPath = [];
   let filesInCurrentPath = [];
 
-  const getElementsInPath = (displayingSettings) => {
+  const getElementsInPath = (displayingSettings, path) => {
     if (displayingSettings == true) {
       return;
     }
@@ -29,9 +29,17 @@
       filesInCurrentPath = elements["files"];
     });
   }
-  $: getElementsInPath(displayingSettings);
+  $: getElementsInPath(displayingSettings, path);
 
   let displayingSettings = false;
+
+  const directoryGoBack = () => {
+    let split_path = path.split("/").filter((directory) => directory != "");
+    split_path.pop();
+
+    let new_path = "/" + split_path.join("/");
+    path = new_path;
+  }
 </script>
 
 <style lang="scss">
@@ -131,7 +139,7 @@
 
 <!-- GO BACK BUTTON -->
 {#if !isRootDirectory}
-  <button id="back-button">
+  <button id="back-button" on:click={directoryGoBack}>
       <img src="/BackArrow.png" alt="[BACK]"/>
       <p>..</p>
   </button>
@@ -139,7 +147,7 @@
 
 <!-- DIRECTORIES -->
 {#each directoriesInCurrentPath as directory}
-  <Directory directory={directory} serverIp={serverIp} path={path} />
+  <Directory directory={directory} serverIp={serverIp} bind:path={path} />
 {/each}
 
 <!-- FILES -->
