@@ -1,6 +1,5 @@
 ==== OBJECTIVES ====
 - Create a simple server to which you can upload files and download them later.
-- Visualize simple files like .png or .txt
 
 ==== PATHS ====
 [DONE] - /explorer//PATH/TO/DIRECTORY -> Show file explorer on the desired directory.

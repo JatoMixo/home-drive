@@ -3,7 +3,7 @@
     export let serverIp;
     export let path;
 
-    let gotRemoved = false; 
+    export let gotRemoved = false; 
 
     const remove = () => {
         fetch("http://" + serverIp + ":8080" + "/delete?path=" + path + "/" + directory + "/");

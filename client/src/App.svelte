@@ -16,7 +16,7 @@
 
   let serverIp = "";
 
-  $: directoriesInCurrentPath = [];
+  let directoriesInCurrentPath = [];
   let filesInCurrentPath = [];
 
   const getElementsInPath = (displayingSettings, path) => {
@@ -39,7 +39,10 @@
 
     let new_path = "/" + split_path.join("/");
     path = new_path;
+    anyDirectoryRemoved = false;
   }
+
+  let anyDirectoryRemoved = false;
 </script>
 
 <style lang="scss">
@@ -147,7 +150,7 @@
 
 <!-- DIRECTORIES -->
 {#each directoriesInCurrentPath as directory}
-  <Directory directory={directory} serverIp={serverIp} bind:path={path} />
+  <Directory directory={directory} serverIp={serverIp} bind:path={path} bind:gotRemoved={anyDirectoryRemoved} />
 {/each}
 
 <!-- FILES -->
