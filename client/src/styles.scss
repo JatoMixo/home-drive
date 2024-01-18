@@ -39,3 +39,18 @@ button:hover {
 button:active {
   background-color: #4D1822;
 }
+
+.text-input {
+  background-color: $normal-background-color;
+  border: none;
+  border-radius: 5px;
+
+  font-family: "Hack Nerd Font";
+  font-size: 18px;
+  color: $red-color;
+  text-shadow: 0 0 3px $red-color;
+}
+
+.text-input:focus {
+  outline: none;
+}

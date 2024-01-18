@@ -29,21 +29,6 @@
         align-items: center;
         gap: 15px;
     }
-
-    .text-input {
-        background-color: $normal-background-color;
-        border: none;
-        border-radius: 5px;
-
-        font-family: "Hack Nerd Font";
-        font-size: 18px;
-        color: $red-color;
-        text-shadow: 0 0 3px $red-color;
-    }
-
-    .text-input:focus {
-        outline: none;
-    }
 </style>
 
 <div id="main-container" class="box">

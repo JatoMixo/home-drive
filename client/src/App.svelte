@@ -16,7 +16,7 @@
 
   let serverIp = "";
 
-  let directoriesInCurrentPath = [];
+  $: directoriesInCurrentPath = [];
   let filesInCurrentPath = [];
 
   const getElementsInPath = (displayingSettings, path) => {
@@ -157,6 +157,6 @@
 
 <!-- BOTTOM ROW -->
 <div id="bottom-row">
-  <NewFolderButton actualPath={path}/>
+  <NewFolderButton actualPath={path} serverIp={serverIp} bind:directoriesInCurrentPath={directoriesInCurrentPath}/>
   <UploadButton actualPath={path}/>
 </div>
