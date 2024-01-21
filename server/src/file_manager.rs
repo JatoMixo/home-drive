@@ -27,10 +27,6 @@ impl File {
         }
     }
 
-    pub fn get_path(&self) -> String {
-        self.path.clone()
-    }
-
     fn get_full_name(&self) -> String {
         self
             .path
