@@ -4,9 +4,12 @@
 mod file_lister;
 use file_lister::get_elements_in_path;
 
+mod file_uploader;
+use file_uploader::upload_file;
+
 fn main() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![get_elements_in_path])
+        .invoke_handler(tauri::generate_handler![get_elements_in_path, upload_file])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
 }
