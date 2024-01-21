@@ -18,12 +18,14 @@
                 "port": 8080,
             }
         });
+
+        uploading = false;
+        filesUploading = undefined;
     }
     
     $: if (filesUploading != undefined) {
         uploadFile(filesUploading[0]);
     }
-
 </script>
 
 <style lang="scss">
