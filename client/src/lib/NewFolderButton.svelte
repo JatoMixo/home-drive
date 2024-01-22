@@ -5,8 +5,8 @@
     let addingFolder = false;
     let newFolderName = "";
 
-    const showAddFolderMenu = () => {
-        addingFolder = true;
+    const switchAddFolderMenu = () => {
+        addingFolder = !addingFolder;
     };
 
     const createDirectory = () => {
@@ -69,7 +69,7 @@
     </div>
 {/if}
 
-<button id="new-folder-button" class="box" on:click={showAddFolderMenu}>
+<button id="new-folder-button" class="box" on:click={switchAddFolderMenu}>
     
     <img src="/AddFolderSymbol.png" alt="" id="icon"/>
     <p id="new-folder-text">New Folder</p>
