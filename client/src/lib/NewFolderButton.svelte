@@ -20,7 +20,10 @@
 </script>
 
 <style lang="scss">
-    @import "../styles.scss";
+    @import "../scss/styles.scss";
+    @import "../scss/box.scss";
+    @import "../scss/text_input.scss";
+    @import "../scss/button.scss";
 
     #create-folder-button,
     #new-folder-button {

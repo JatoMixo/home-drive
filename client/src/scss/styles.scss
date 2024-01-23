@@ -1,0 +1,14 @@
+@import "variables.scss";
+
+@font-face {
+  font-family: "Hack Nerd Font";
+  src: url("/HackNerdFont.ttf");
+}
+
+:root {
+  background-color: $normal-background-color;
+
+  color: white;
+  text-shadow: 0 0 4px white;
+  font-family: "Hack Nerd Font";
+}

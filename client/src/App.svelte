@@ -46,7 +46,7 @@
 </script>
 
 <style lang="scss">
-  @import "styles.scss";
+  @import "scss/styles.scss";
 
   #top-row {
     position: sticky;

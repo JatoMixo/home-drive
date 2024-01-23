@@ -3,7 +3,9 @@
 </script>
 
 <style lang="scss">
-    @import "../styles.scss";
+    @import "../scss/variables.scss";
+    @import "../scss/box.scss";
+    @import "../scss/text_input.scss";
 
     #main-container {
         padding: 12px;

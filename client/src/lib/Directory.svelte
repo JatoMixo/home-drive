@@ -16,7 +16,7 @@
 </script>
 
 <style lang="scss">
-    @import "../styles.scss";
+    @import "../scss/styles.scss";
 
     #main-container {
         display: flex;

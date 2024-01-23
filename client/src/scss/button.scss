@@ -1,0 +1,13 @@
+button {
+  background-color: $dark-background-color;
+
+  transition: background-color 100ms;
+}
+
+button:hover {
+  background-color: #151515;
+}
+
+button:active {
+  background-color: #4D1822;
+}

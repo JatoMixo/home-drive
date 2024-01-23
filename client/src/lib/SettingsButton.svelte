@@ -7,7 +7,9 @@
 </script>
 
 <style lang="scss">
-    @import "../styles.scss";
+    @import "../scss/styles.scss";
+    @import "../scss/box.scss";
+    @import "../scss/button.scss";
 
     #settings-button {
         padding: 5px;

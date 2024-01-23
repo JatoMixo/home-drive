@@ -3,9 +3,8 @@
 </script>
 
 <style lang="scss">
-
-    // Import the color variables
-    @import "../styles.scss";
+    @import "../scss/styles.scss";
+    @import "../scss/box.scss";
 
     #path-container {
         padding: 10px;

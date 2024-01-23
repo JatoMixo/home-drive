@@ -1,4 +1,4 @@
-<script lang="ts">
+<script>
     import { invoke } from "@tauri-apps/api";
 
     export let actualPath = "";
@@ -6,12 +6,21 @@
     let uploading = false;
     let filesUploading = undefined;
 
+    const getFileContent = (file) => {
+        return [65, 66, 67];
+    }
+
     const uploadFile = (fileToUpload) => {
+        if (!fileToUpload) {
+            return;
+        }
+
+        let fileContent = getFileContent(fileToUpload);
         invoke("upload_file", {
             "fileUpload": {
                 "name": fileToUpload.name,
                 "path_to_upload": actualPath,
-                "content": [65, 66, 67, 68],
+                "content": fileContent,
             },
             "server": {
                 "ip": serverIp,
@@ -29,7 +38,9 @@
 </script>
 
 <style lang="scss">
-    @import "../styles.scss";
+    @import "../scss/styles.scss";
+    @import "../scss/box.scss";
+    @import "../scss/button.scss";
 
     #upload-button {
         display: flex;
