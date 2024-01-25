@@ -5,6 +5,11 @@
 
     export let gotRemoved = false; 
 
+    const setNotRemoved = (path) => {
+        gotRemoved = false;
+    };
+    $: setNotRemoved(path);
+
     const remove = () => {
         fetch("http://" + serverIp + ":8080" + "/delete?path=" + path + "/" + directory + "/");
         gotRemoved = true;
