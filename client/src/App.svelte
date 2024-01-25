@@ -158,5 +158,5 @@
 <!-- BOTTOM ROW -->
 <div id="bottom-row">
   <NewFolderButton actualPath={path} serverIp={serverIp} bind:directoriesInCurrentPath={directoriesInCurrentPath}/>
-  <UploadButton actualPath={path} serverIp={serverIp}/>
+  <UploadButton actualPath={path} serverIp={serverIp} bind:filesInCurrentDirectory={filesInCurrentPath}/>
 </div>

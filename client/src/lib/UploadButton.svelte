@@ -3,6 +3,8 @@
 
     export let actualPath = "";
     export let serverIp = "";
+    export let filesInCurrentDirectory = [];
+
     let uploading = false;
     let filesUploading = undefined;
 
@@ -33,6 +35,9 @@
 
             uploading = false;
             filesUploading = undefined;
+
+            filesInCurrentDirectory.push(fileToUpload.name);
+            filesInCurrentDirectory = filesInCurrentDirectory;
         });
     }
     
