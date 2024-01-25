@@ -19,7 +19,6 @@
         }
 
         getFileContent(fileToUpload).then((fileContent) => {
-            console.log(fileContent);
             invoke("upload_file", {
                 "fileUpload": {
                     "name": fileToUpload.name,
