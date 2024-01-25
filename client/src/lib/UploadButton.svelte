@@ -6,8 +6,11 @@
     let uploading = false;
     let filesUploading = undefined;
 
-    const getFileContent = (file) => {
-        return [65, 66, 67];
+    const getFileContent = async (file) => {
+        let buffer = await file.arrayBuffer();
+        let byteArray = Array.from(new Uint8Array(buffer));
+
+        return byteArray;
     }
 
     const uploadFile = (fileToUpload) => {
@@ -15,21 +18,23 @@
             return;
         }
 
-        let fileContent = getFileContent(fileToUpload);
-        invoke("upload_file", {
-            "fileUpload": {
-                "name": fileToUpload.name,
-                "path_to_upload": actualPath,
-                "content": fileContent,
-            },
-            "server": {
-                "ip": serverIp,
-                "port": 8080,
-            }
-        });
+        getFileContent(fileToUpload).then((fileContent) => {
+            console.log(fileContent);
+            invoke("upload_file", {
+                "fileUpload": {
+                    "name": fileToUpload.name,
+                    "path_to_upload": actualPath,
+                    "content": fileContent,
+                },
+                "server": {
+                    "ip": serverIp,
+                    "port": 8080,
+                }
+            });
 
-        uploading = false;
-        filesUploading = undefined;
+            uploading = false;
+            filesUploading = undefined;
+        });
     }
     
     $: if (filesUploading != undefined) {
