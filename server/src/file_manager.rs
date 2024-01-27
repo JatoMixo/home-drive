@@ -27,7 +27,7 @@ impl File {
         }
     }
 
-    fn get_full_name(&self) -> String {
+    fn get_name(&self) -> String {
         self
             .path
             .split("/")
@@ -79,12 +79,16 @@ impl Directory {
         last_element_of_path.clone()
     }
 
-    pub fn get_subdirectories(&self) -> Vec<Directory> {
+    fn get_directory_elements_filtered_by(&self, condition: fn(&fs::DirEntry) -> bool) -> Vec<Result<fs::DirEntry, std::io::Error>> {
         let directory_elements = fs::read_dir(&self.get_absolute_path()).expect("Path didn't exist");
 
         directory_elements
-            .filter(|element| is_element_directory(element.as_ref().unwrap()))
+            .filter(|element| condition(element.as_ref().unwrap()))
             .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
+    }
+
+    pub fn get_subdirectories(&self) -> Vec<Directory> {
+        self.get_directory_elements_filtered_by(|element| is_element_directory(element))
             .iter()
             .map(|sub_directory| {
                 Directory::new(
@@ -95,15 +99,11 @@ impl Directory {
     }
 
     pub fn get_files(&self) -> Vec<File> {
-        let directory_elements = fs::read_dir(&self.get_absolute_path()).expect("Path didn't exist");
-
-        directory_elements
-            .filter(|element| !is_element_directory(element.as_ref().unwrap()))
-            .collect::<Vec<Result<fs::DirEntry, std::io::Error>>>()
+        self.get_directory_elements_filtered_by(|element| !is_element_directory(element))
             .iter()
-            .map(|sub_directory| {
+            .map(|file| {
                 File::open(
-                    &get_element_path(sub_directory.as_ref().unwrap())
+                    &get_element_path(file.as_ref().unwrap())
                 )
             })
             .collect::<Vec<File>>()
@@ -116,8 +116,9 @@ impl Directory {
         let directories_names = directories.iter().map(|directory| {
             directory.get_name()
         }).collect::<Vec<String>>();
+
         let files_names = files.iter().map(|file| {
-            file.get_full_name()
+            file.get_name()
         }).collect::<Vec<String>>();
 
         json!({
