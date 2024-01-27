@@ -158,10 +158,10 @@ fn is_element_directory(element: &fs::DirEntry) -> bool {
 }
 
 fn get_element_path(element: &fs::DirEntry) -> String {
-    let full_path = element.path().to_str().unwrap().to_string();
+    let absolute_path = element.path().to_str().unwrap().to_string();
     let drive_storagement_prefix = &format!("{}/", STORAGEMENT_DIR_NAME);
 
-    full_path.strip_prefix(drive_storagement_prefix).unwrap_or(&full_path).to_string()
+    absolute_path.strip_prefix(drive_storagement_prefix).unwrap_or(&absolute_path).to_string()
 }
 
 fn convert_local_path_to_absolute(local_path: &str) -> String {
