@@ -23,7 +23,7 @@ impl File {
         let path = path.replace("\\", "/");
 
         File {
-            path: path,
+            path,
         }
     }
 
@@ -58,6 +58,7 @@ impl Directory {
     pub fn new(path: &str) -> Directory {
         let path = path.replace("\\", "/");
         let storagement_path = convert_local_path_to_absolute(&path);
+
         if fs::read_dir(&path).is_err() {
             fs::create_dir_all(storagement_path).expect("Error creating Directory");
         }
