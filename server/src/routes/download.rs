@@ -4,14 +4,13 @@ use crate::file_manager::File;
 pub async fn handle_download_route(req: tide::Request<()>) -> tide::Result<Response> {
 
     const ROUTE_NAME: &str = "/download/";
-    let path: String = req
+    let path: &str = req
         .url()
         .path()
         .strip_prefix(ROUTE_NAME)
-        .unwrap()
-        .to_string();
+        .unwrap();
 
-    let file = File::open(&path);
+    let file = File::open(path);
 
     const DOWNLOAD_FILE_HTTP_HEADER: &str = "application/octet-stream";
     let response = Response::builder(StatusCode::Ok)

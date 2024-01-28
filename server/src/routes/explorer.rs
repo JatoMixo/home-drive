@@ -7,10 +7,9 @@ pub async fn handle_explorer(req: tide::Request<()>) -> tide::Result<tide::Body>
         .url()
         .path()
         .strip_prefix(EXPLORER_ROUTE_NAME)
-        .unwrap()
-        .to_string();
+        .unwrap();
 
-    let directory_content = Directory::new(&file_path).build_files_and_directories_json();
+    let directory_content = Directory::new(file_path).build_files_and_directories_json();
 
     Ok(tide::Body::from_json(&directory_content)?)
 }
