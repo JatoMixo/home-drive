@@ -1,6 +1,6 @@
 <script lang="ts">
     export let directory;
-    export let serverIp;
+    export let server;
     export let path;
 
     export let gotRemoved = false; 
@@ -11,7 +11,7 @@
     $: setNotRemoved(path);
 
     const remove = () => {
-        fetch("http://" + serverIp + ":8080" + "/delete?path=" + path + "/" + directory + "/");
+        fetch("http://" + server.ip + ":" + server.port + "/delete?path=" + path + "/" + directory + "/");
         gotRemoved = true;
     };
 

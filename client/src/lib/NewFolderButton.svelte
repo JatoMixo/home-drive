@@ -1,6 +1,6 @@
 <script lang="ts">
     export let actualPath = "";
-    export let serverIp;
+    export let server;
     export let directoriesInCurrentPath;
     let addingFolder = false;
     let newFolderName = "";
@@ -10,7 +10,7 @@
     };
 
     const createDirectory = () => {
-        fetch("http://" + serverIp + ":8080" + "/directory?path=" + actualPath + "/" + newFolderName + "/");
+        fetch("http://" + server.ip + ":" + server.port + "/directory?path=" + actualPath + "/" + newFolderName + "/");
         directoriesInCurrentPath.push(newFolderName);
         directoriesInCurrentPath = directoriesInCurrentPath;
 

@@ -1,12 +1,12 @@
 <script lang="ts">
     export let file;
     export let path;
-    export let serverIp;
+    export let server;
 
     let gotRemoved = false;
 
     const remove = () => {
-        fetch("http://" + serverIp + ":8080" + "/delete?path=" + path + "/" + file);
+        fetch("http://" + server.ip + ":" + server.port + "/delete?path=" + path + "/" + file);
         gotRemoved = true;
     };
 </script>
@@ -83,7 +83,7 @@
         <img src="/FileSymbol.png" alt="[FILE]" id="icon"/>
         <p id="name">{file}</p>
 
-        <a id="download" class="action-button" href={"http://" + serverIp + ":8080" + "/download/" + path + "/" + file}>
+        <a id="download" class="action-button" href={"http://" + server.ip + ":" + server.port + "/download/" + path + "/" + file}>
             <img src="/DownloadSymbol.png" alt="[DOWNLOAD]" class="action-button-icon"/>
         </a>
         <button id="delete" class="action-button" on:click={remove}>

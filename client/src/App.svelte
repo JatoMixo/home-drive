@@ -14,7 +14,10 @@
   let path = "/";
   $: isRootDirectory = path == "/";
 
-  let serverIp = "";
+  let server = {
+    ip: "localhost",
+    port: 8080,
+  };
 
   let directoriesInCurrentPath = [];
   let filesInCurrentPath = [];
@@ -24,7 +27,7 @@
       return;
     }
 
-    invoke("get_elements_in_path", {"path": path, "server": {"ip": serverIp, "port": 8080}}).then((elements) => {
+    invoke("get_elements_in_path", {"path": path, "server": server}).then((elements) => {
       directoriesInCurrentPath = elements["directories"];
       filesInCurrentPath = elements["files"];
     });
@@ -133,7 +136,7 @@
 <!-- SETTINGS MENU -->
 {#if displayingSettings}
   <div id="settings-menu-container">
-    <SettingsMenu bind:ip={serverIp}/>
+    <SettingsMenu bind:ip={server.ip}/>
   </div>
 {/if}
 
@@ -147,16 +150,16 @@
 
 <!-- DIRECTORIES -->
 {#each directoriesInCurrentPath as directory}
-  <Directory directory={directory} serverIp={serverIp} bind:path={path} gotRemoved={false} />
+  <Directory directory={directory} server={server} bind:path={path} gotRemoved={false} />
 {/each}
 
 <!-- FILES -->
 {#each filesInCurrentPath as file}
-  <File file={file} path={path} serverIp={serverIp} />
+  <File file={file} path={path} server={server} />
 {/each}
 
 <!-- BOTTOM ROW -->
 <div id="bottom-row">
-  <NewFolderButton actualPath={path} serverIp={serverIp} bind:directoriesInCurrentPath={directoriesInCurrentPath}/>
-  <UploadButton actualPath={path} serverIp={serverIp} bind:filesInCurrentDirectory={filesInCurrentPath}/>
+  <NewFolderButton actualPath={path} server={server} bind:directoriesInCurrentPath={directoriesInCurrentPath}/>
+  <UploadButton actualPath={path} server={server} bind:filesInCurrentDirectory={filesInCurrentPath}/>
 </div>

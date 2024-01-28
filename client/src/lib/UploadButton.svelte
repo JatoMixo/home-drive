@@ -2,7 +2,7 @@
     import { invoke } from "@tauri-apps/api";
 
     export let actualPath = "";
-    export let serverIp = "";
+    export let server;
     export let filesInCurrentDirectory = [];
 
     let uploading = false;
@@ -27,10 +27,7 @@
                     "path_to_upload": actualPath,
                     "content": fileContent,
                 },
-                "server": {
-                    "ip": serverIp,
-                    "port": 8080,
-                }
+                "server": server,
             });
 
             uploading = false;
