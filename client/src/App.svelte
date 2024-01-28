@@ -24,7 +24,7 @@
       return;
     }
 
-    invoke("get_elements_in_path", {"ip": serverIp, "path": path}).then((elements) => {
+    invoke("get_elements_in_path", {"path": path, "server": {"ip": serverIp, "port": 8080}}).then((elements) => {
       directoriesInCurrentPath = elements["directories"];
       filesInCurrentPath = elements["files"];
     });
